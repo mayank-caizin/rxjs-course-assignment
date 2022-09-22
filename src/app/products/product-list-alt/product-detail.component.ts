@@ -2,8 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { catchError, combineLatest, EMPTY, filter, map, Subject } from 'rxjs';
 
 import { ProductService } from '../product.service';
-import { CartService } from '../../cart/cart.service';
-import { Product } from '../product';
 
 @Component({
   selector: 'pm-product-detail',
@@ -45,10 +43,6 @@ export class ProductDetailComponent {
         ({ product, productSuppliers, pageTitle }))
     );
 
-  constructor(private productService: ProductService,
-              private cartService: CartService) { }
+  constructor(private productService: ProductService) { }
 
-  addToCart(product: Product) {
-    this.cartService.addToCart(product);
-  }
 }

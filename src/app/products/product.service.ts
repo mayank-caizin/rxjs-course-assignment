@@ -50,25 +50,15 @@ export class ProductService {
     shareReplay(1)
   );
 
-  // Suppliers for product using the "get it all" approach
-  // Rename to selectedProductSuppliers$ to use
-  // Add a catchError so that the display appears
-  // even if the suppliers cannot be retrieved.
-  // Note that it must return an empty array and not EMPTY
-  // or the stream will complete.
-  selectedProductSuppliersGetAll$ = combineLatest([
-    this.selectedProduct$,
-    this.supplierService.suppliers$
-      .pipe(
-        catchError(err => of([] as Supplier[]))
-      )
-  ]).pipe(
-    map(([selectedProduct, suppliers]) =>
-      suppliers.filter(supplier => selectedProduct?.supplierIds?.includes(supplier.id))
-    )
-  );
+  // selectedProductSuppliers$ = combineLatest([
+  //   this.selectedProduct$,
+  //   this.supplierService.suppliers$
+  // ]).pipe(
+  //   map(([selectedProduct, suppliers]) =>
+  //     suppliers.filter(supplier => selectedProduct?.supplierIds?.includes(supplier.id))
+  //   )
+  // );
 
-  // Suppliers for product using the "just in time" approach
   selectedProductSuppliers$ = this.selectedProduct$
     .pipe(
       filter(product => Boolean(product)),
